@@ -1,24 +1,31 @@
 [
 {
-	"uri": "https://xuemark.github.io/",
+	"uri": "https://xuemark.github.io/_index-copy/",
 	"title": "Mark Intro",
 	"tags": [],
 	"description": "",
 	"content": "Mark Intro nice 要完成整个实验，大约需要2小时。\n 通过本次实验，您可以了解如何把阿里云上的应用系统迁移到AWS平台。\n从技术上来说，您可以了解以下技术内容：\n  学习如何配置CloudEndure进行应用服务器迁移\n  学习如何运行AWS DMS进行数据库迁移\n  学习如何把阿里云OSS上的数据迁移到Amazon S3\n  了解如何进行应用切割\n  学习如何把ACK上的容器化应用迁移到Amazon EKS上\n  学习如何把阿里云上的Blink实时数据处理系统迁移到Flink on EMR上\n  "
 },
 {
-	"uri": "https://xuemark.github.io/1.workshop_inspector/",
-	"title": "整体实验介绍",
+	"uri": "https://xuemark.github.io/",
+	"title": "Mark Intro",
 	"tags": [],
 	"description": "",
-	"content": " 如果你已经对整个实验有所了解，则可以跳过当前部分，而进入下一个步骤。否则，建议请阅读本部分，了解整个实验的目的以及所需要进行的步骤。\n Use Scenario 本次实验中，模拟了部署在阿里云上的三个应用，并把这些应用迁移到了AWS平台上。\n  一套部署在虚拟机里的三层架构的应用系统\n  一套基于容器化的应用系统\n  一套部署在Blink上的实时数据处理系统\n  本次实验环节包括：\n1.在阿里云中部署Wordpress应用系统，基于容器化的应用系统，以及Blink上的实时数据处理系统。\n2.以宁夏region为目标站点，部署Landing Zone，包括VPC、子网、安全组\n3.搭建Site-To-Site VPN\n3.部署CloudEndure，对应用服务器进行迁移\n4.部署AWS DMS，对数据库进行迁移\n5.把OSS里的文件迁移到到Amazon S3上\n6.系统切割\n7.把部署在ACK上容器应用迁移到EKS上（可选）\n8.把部署在Blink上的数据处理系统迁移到Flink on EMR上（可选）\n"
+	"content": "Mark Intro I am a good man.\n This is my record for workshop\n  Inspector Workshop\n  EKS Workshop\n  "
+},
+{
+	"uri": "https://xuemark.github.io/1.workshop_inspector/",
+	"title": "1. Inspector Workshop",
+	"tags": [],
+	"description": "",
+	"content": "Inspector Workshop This is link for inspector workshop.\n "
 },
 {
 	"uri": "https://xuemark.github.io/2.workshop_eks/",
-	"title": "部署容灾环境的Landing Zone",
+	"title": "2. EKS Workshop",
 	"tags": [],
 	"description": "",
-	"content": "部署容灾环境的Landing Zone 本次实验会在AWS宁夏region部署容灾环境的基础架构，部署过程中，会在AWS Landing Zone的理念下，以符合AWS最佳实践的方式部署基础架构。本次实验包括两部分：\n  通过Cloudformation脚本部署相关资源。\n  把本地数据中心的网络和容灾环境的网络打通。\n  先进行如下的准备工作：\n1.创建DMS IAM role。进入创建IAM role的控制台：https://console.amazonaws.cn/iam/home?region=cn-northwest-1#/roles$new?step=type\n选择\u0026quot;AWS产品\u0026rdquo;，在\u0026quot;或者选择一个服务以查看其使用案例\u0026quot;部分选择DMS。点击【下一步:权限】按钮。 在\u0026quot;Attach权限策略\u0026quot;页面上，选择名为\u0026quot;AmazonDMSVPCManagementRole\u0026quot;的策略。点击【下一步:标签】按钮。 在\u0026quot;添加标签 (可选)\u0026ldquo;页面上，保留缺省值，点击【下一步:审核】按钮。\n在\u0026quot;创建角色\u0026quot;页面上，\u0026ldquo;角色名称\u0026quot;输入：dms-vpc-role，点击【创建角色】按钮。 "
+	"content": "EKS Workshop This is link for eks workshop.\n "
 },
 {
 	"uri": "https://xuemark.github.io/categories/",

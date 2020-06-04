@@ -15,24 +15,24 @@
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
 
-    <title>部署容灾环境的Landing Zone :: Mark Page</title>
+    <title>2. EKS Workshop :: Mark Page</title>
 
     
-    <link href="../css/nucleus.css?1591291849" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1591291849" rel="stylesheet">
-    <link href="../css/hybrid.css?1591291849" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1591291849" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1591291849" rel="stylesheet">
-    <link href="../css/auto-complete.css?1591291849" rel="stylesheet">
-    <link href="../css/theme.css?1591291849" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1591291849" rel="stylesheet">
-    <link href="../css/jquery-ui.min.css?1591291849" rel="stylesheet">
+    <link href="../css/nucleus.css?1591292749" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1591292749" rel="stylesheet">
+    <link href="../css/hybrid.css?1591292749" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1591292749" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1591292749" rel="stylesheet">
+    <link href="../css/auto-complete.css?1591292749" rel="stylesheet">
+    <link href="../css/theme.css?1591292749" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1591292749" rel="stylesheet">
+    <link href="../css/jquery-ui.min.css?1591292749" rel="stylesheet">
     
-      <link href="../css/theme-mine.css?1591291849" rel="stylesheet">
+      <link href="../css/theme-mine.css?1591292749" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1591291849"></script>
-    <script src="../js/jquery-ui-1.12.1.min.js?1591291849"></script>
+    <script src="../js/jquery-3.3.1.min.js?1591292749"></script>
+    <script src="../js/jquery-ui-1.12.1.min.js?1591292749"></script>
 
 
     <style type="text/css">
@@ -67,13 +67,35 @@
  
   
     
-    <li data-nav-id="/1.workshop_inspector/" title="整体实验介绍" class="dd-item 
+    <li data-nav-id="/1.workshop_inspector/" title="1. Inspector Workshop" class="dd-item 
         
         
         
         ">
       <a href="../1.workshop_inspector/">
-          整体实验介绍
+          1. Inspector Workshop
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/2.workshop_eks/" title="2. EKS Workshop" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="../2.workshop_eks/">
+          2. EKS Workshop
           
       </a>
       
@@ -132,7 +154,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/xuemark/xuemark.github.io/origin//2.workshop_eks.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/xuemark/xuemark.github.io/origin/2.workshop_eks/_index.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -157,7 +179,7 @@
             
           
           
-            <a href='../'>Mark Intro</a> > 部署容灾环境的Landing Zone
+            <a href='../'>Mark Intro</a> > 2. EKS Workshop
           
          
           
@@ -169,7 +191,7 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#部署容灾环境的landing-zone">部署容灾环境的Landing Zone</a></li>
+    <li><a href="#eks-workshop">EKS Workshop</a></li>
   </ul>
 </nav>
     </div>
@@ -183,37 +205,26 @@
         
         <div id="body-inner">
           
-            <h1>部署容灾环境的Landing Zone</h1>
+            <h1>2. EKS Workshop</h1>
           
 
         
 
 
-<h2 id="部署容灾环境的landing-zone">部署容灾环境的Landing Zone</h2>
-<p>本次实验会在AWS宁夏region部署容灾环境的基础架构，部署过程中，会在AWS Landing Zone的理念下，以符合AWS最佳实践的方式部署基础架构。本次实验包括两部分：</p>
-<ul>
-<li>
-<p>通过Cloudformation脚本部署相关资源。</p>
-</li>
-<li>
-<p>把本地数据中心的网络和容灾环境的网络打通。</p>
-</li>
-</ul>
-<p>先进行如下的准备工作：</p>
-<p>1.创建DMS IAM role。进入创建IAM role的控制台：https://console.amazonaws.cn/iam/home?region=cn-northwest-1#/roles$new?step=type</p>
-<p>选择&quot;AWS产品&rdquo;，在&quot;或者选择一个服务以查看其使用案例&quot;部分选择DMS。点击【下一步:权限】按钮。
-<img src="../images/LandingZoneOfDRSite/createDMSRole1.png" alt=""></p>
-<p>在&quot;Attach权限策略&quot;页面上，选择名为&quot;AmazonDMSVPCManagementRole&quot;的策略。点击【下一步:标签】按钮。
-<img src="../images/LandingZoneOfDRSite/createDMSRole2.png" alt=""></p>
-<p>在&quot;添加标签 (可选)&ldquo;页面上，保留缺省值，点击【下一步:审核】按钮。</p>
-<p>在&quot;创建角色&quot;页面上，&ldquo;角色名称&quot;输入：dms-vpc-role，点击【创建角色】按钮。
-<img src="../images/LandingZoneOfDRSite/createDMSRole3.png" alt=""></p>
+
+	<h2 id="eks-workshop">EKS Workshop</h2>
+
+<div class="notices note" ><p>This is <a href="http://github.com/xuemark/workshop-eks">link</a> for eks workshop.</p>
+</div>
+
+
+
+
 
 
 <footer class=" footline" >
 	
 </footer>
-
 
         
         </div>
@@ -260,6 +271,23 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
 
@@ -267,8 +295,10 @@
 
 
         
+            <a class="nav nav-prev" href="../1.workshop_inspector/" title="1. Inspector Workshop"> <i class="fas fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="../1.workshop_inspector/" title="整体实验介绍" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="../1.workshop_inspector/" title="1. Inspector Workshop" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
         
     </div>
 
@@ -277,19 +307,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1591291849"></script>
-    <script src="../js/perfect-scrollbar.min.js?1591291849"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1591291849"></script>
-    <script src="../js/jquery.sticky.js?1591291849"></script>
-    <script src="../js/featherlight.min.js?1591291849"></script>
-    <script src="../js/highlight.pack.js?1591291849"></script>
+    <script src="../js/clipboard.min.js?1591292749"></script>
+    <script src="../js/perfect-scrollbar.min.js?1591292749"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1591292749"></script>
+    <script src="../js/jquery.sticky.js?1591292749"></script>
+    <script src="../js/featherlight.min.js?1591292749"></script>
+    <script src="../js/highlight.pack.js?1591292749"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1591291849"></script>
-    <script src="../js/learn.js?1591291849"></script>
-    <script src="../js/hugo-learn.js?1591291849"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1591292749"></script>
+    <script src="../js/learn.js?1591292749"></script>
+    <script src="../js/hugo-learn.js?1591292749"></script>
 
-    <link href="../mermaid/mermaid.css?1591291849" type="text/css" rel="stylesheet" />
-    <script src="../mermaid/mermaid.min.js?1591291849"></script>
+    <link href="../mermaid/mermaid.css?1591292749" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.min.js?1591292749"></script>
     <script>
 	var config = {
         startOnLoad:true,
@@ -303,4 +333,3 @@
 
   </body>
 </html>
-
