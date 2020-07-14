@@ -4,7 +4,7 @@
 	"title": "EKS Workshop",
 	"tags": [],
 	"description": "",
-	"content": "EKS Workshop I am a good man.\n This is my record for workshop\n  Inspector Workshop\n  EKS Workshop\n  1. Login to AWS Console 2. Install tools for EKS 3. Create EKS cluster and nodegroup 4. Docker Image Build 5. Create APP/Deployment/Service 6. Create ALB Ingress Controller 7. Create service account for pod 8. Scale pod with HPA and CA "
+	"content": "EKS Workshop Mark Xue contributed\n "
 },
 {
 	"uri": "https://xuemark.github.io/1.login-to-aws-console/",
