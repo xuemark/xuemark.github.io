@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://xuemark.github.io/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/1.login-to-aws-console/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/2.install-tools-for-eks/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/3.create-eks-cluster-and-nodegroup/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/4.docker-image-build/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/5.create-app/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/6.create-alb-ingress-controller/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/7.create-service-account/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/8.scale-pod-node/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xuemark.github.io/tags/</loc>
+  </url>
+  
+</urlset>

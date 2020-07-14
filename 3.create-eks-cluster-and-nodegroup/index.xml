@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3. Create EKS Cluster and Nodegroup on EKS Workshop</title>
+    <link>https://xuemark.github.io/3.create-eks-cluster-and-nodegroup/</link>
+    <description>Recent content in 3. Create EKS Cluster and Nodegroup on EKS Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://xuemark.github.io/3.create-eks-cluster-and-nodegroup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
