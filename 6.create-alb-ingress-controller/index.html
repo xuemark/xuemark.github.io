@@ -18,21 +18,21 @@
     <title>6. Create ALB Ingress Controller :: EKS Workshop</title>
 
     
-    <link href="../css/nucleus.css?1594737289" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1594737289" rel="stylesheet">
-    <link href="../css/hybrid.css?1594737289" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1594737289" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1594737289" rel="stylesheet">
-    <link href="../css/auto-complete.css?1594737289" rel="stylesheet">
-    <link href="../css/theme.css?1594737289" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1594737289" rel="stylesheet">
-    <link href="../css/jquery-ui.min.css?1594737289" rel="stylesheet">
+    <link href="../css/nucleus.css?1596561263" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1596561263" rel="stylesheet">
+    <link href="../css/hybrid.css?1596561263" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1596561263" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1596561263" rel="stylesheet">
+    <link href="../css/auto-complete.css?1596561263" rel="stylesheet">
+    <link href="../css/theme.css?1596561263" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1596561263" rel="stylesheet">
+    <link href="../css/jquery-ui.min.css?1596561263" rel="stylesheet">
     
-      <link href="../css/theme-mine.css?1594737289" rel="stylesheet">
+      <link href="../css/theme-mine.css?1596561263" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1594737289"></script>
-    <script src="../js/jquery-ui-1.12.1.min.js?1594737289"></script>
+    <script src="../js/jquery-3.3.1.min.js?1596561263"></script>
+    <script src="../js/jquery-ui-1.12.1.min.js?1596561263"></script>
 
 
     <style type="text/css">
@@ -199,13 +199,13 @@
  
   
     
-    <li data-nav-id="/7.create-service-account/" title="7. Create service account for pod" class="dd-item 
+    <li data-nav-id="/7.monitor/" title="7. Monitoring EKS" class="dd-item 
         
         
         
         ">
-      <a href="../7.create-service-account/">
-          7. Create service account for pod
+      <a href="../7.monitor/">
+          7. Monitoring EKS
           
       </a>
       
@@ -221,13 +221,35 @@
  
   
     
-    <li data-nav-id="/8.scale-pod-node/" title="8. Scale pod and node" class="dd-item 
+    <li data-nav-id="/8.create-service-account/" title="8. Create service account for pod" class="dd-item 
         
         
         
         ">
-      <a href="../8.scale-pod-node/">
-          8. Scale pod and node
+      <a href="../8.create-service-account/">
+          8. Create service account for pod
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/9.scale-pod-node/" title="9. Scale pod and node" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../9.scale-pod-node/">
+          9. Scale pod and node
           
       </a>
       
@@ -314,7 +336,6 @@
     </li>
     <li><a href="#5-create-alb-app">5. create ALB APP</a>
       <ul>
-        <li><a href="#get-vpc-id">get vpc-id</a></li>
         <li><a href="#create-alb-ingress-controller-v115yaml">create alb-ingress-controller-v1.1.5.yaml</a></li>
         <li><a href="#create-alb-deployment">create ALB deployment</a></li>
         <li><a href="#view-pod">view pod</a></li>
@@ -322,7 +343,7 @@
     </li>
     <li><a href="#6-create-ingress-for-service---create-alb">6. create ingress for service - create ALB</a>
       <ul>
-        <li><a href="#check-subnet-tags">check subnet tags</a></li>
+        <li><a href="#add-subnet-tags">add subnet tags</a></li>
         <li><a href="#create-alb-ingressyml">create alb-ingress.yml</a></li>
         <li><a href="#create-alb">create ALB</a></li>
       </ul>
@@ -560,15 +581,7 @@ EOF
 </code></pre><h3 id="create-rbac">create RBAC</h3>
 <pre><code>kubectl apply -f rbac-role-v1.1.5.yaml
 </code></pre><h2 id="5-create-alb-app">5. create ALB APP</h2>
-<h3 id="get-vpc-id">get vpc-id</h3>
-<pre><code>eksctl get cluster --name eks-test -o json | jq -r '.[].ResourcesVpcConfig.VpcId'
-</code></pre><h3 id="create-alb-ingress-controller-v115yaml">create alb-ingress-controller-v1.1.5.yaml</h3>
-<p>modify</p>
-<ul>
-<li>&ndash;cluster-name=xxx</li>
-<li>&ndash;aws-vpc-id=xxx</li>
-<li>&ndash;aws-region=xxx</li>
-</ul>
+<h3 id="create-alb-ingress-controller-v115yaml">create alb-ingress-controller-v1.1.5.yaml</h3>
 <pre><code>cat &lt;&lt;EOF &gt; alb-ingress-controller-v1.1.5.yaml
 # Application Load Balancer (ALB) Ingress Controller Deployment Manifest.
 # This manifest details sensible defaults for deploying an ALB Ingress Controller.
@@ -612,7 +625,7 @@ spec:
 
             # AWS VPC ID this ingress controller will use to create AWS resources.
             # If unspecified, it will be discovered from ec2metadata.
-            - --aws-vpc-id=vpc-07d32d2994e87f2cd
+            - --aws-vpc-id=xxx
 
             # AWS region this ingress controller will operate in.
             # If unspecified, it will be discovered from ec2metadata.
@@ -642,22 +655,21 @@ spec:
       serviceAccountName: alb-ingress-controller
 EOF
 
+</code></pre><p>update vpc id</p>
+<pre><code>export VPCID=$(eksctl get cluster --name ${CLUSTER_NAME} --region ${AWS_REGION} -o json | jq -r '.[].ResourcesVpcConfig.VpcId')
+
+sed -i &quot;s#xxx#${VPCID}#&quot; alb-ingress-controller-v1.1.5.yaml
 </code></pre><h3 id="create-alb-deployment">create ALB deployment</h3>
 <pre><code>kubectl apply -f alb-ingress-controller-v1.1.5.yaml
 </code></pre><h3 id="view-pod">view pod</h3>
 <pre><code>kubectl get pod -A
 </code></pre><h2 id="6-create-ingress-for-service---create-alb">6. create ingress for service - create ALB</h2>
-<h3 id="check-subnet-tags">check subnet tags</h3>
-<ul>
-<li>点击左上角Services，搜索VPC。</li>
-<li>点击VPC进入。</li>
-<li>点击左侧Subnets。</li>
-<li>点击Public Subnet x。</li>
-<li>查看下面窗口的Tags，是否包含kubernetes.io/role/elb</li>
-<li>如果没有，点击add/edit tags.</li>
-<li>然后点击create tags，输入key = kubernetes.io/role/elb ， Value = 1</li>
-</ul>
-<h3 id="create-alb-ingressyml">create alb-ingress.yml</h3>
+<h3 id="add-subnet-tags">add subnet tags</h3>
+<pre><code>subnets=$(aws ec2 describe-subnets  --filters Name=tag:Name,Values=&quot;Public Subnet 1&quot;,&quot;Public Subnet 2&quot;,&quot;Public Subnet 3&quot; --region $AWS_REGION --query &quot;Subnets[*].{SubnetId:SubnetId}&quot; --o text)
+
+aws ec2 create-tags --resources ${subnets} --region ${AWS_REGION} --tags Key=kubernetes.io/role/elb,Value=1
+
+</code></pre><h3 id="create-alb-ingressyml">create alb-ingress.yml</h3>
 <pre><code>cat &lt;&lt;EOF &gt; alb-ingress.yml
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -686,7 +698,7 @@ EOF
 </code></pre><p>output</p>
 <pre><code>AME          HOSTS   ADDRESS                                                                       PORTS   AGE
 alb-ingress   *       xxx.ap-southeast-1.elb.amazonaws.com   80      13m
-</code></pre><p>browser</p>
+</code></pre><p>in browser, input below:</p>
 <pre><code>http://xxx.ap-southeast-1.elb.amazonaws.com
 </code></pre>
 
@@ -858,6 +870,22 @@ alb-ingress   *       xxx.ap-southeast-1.elb.amazonaws.com   80      13m
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
 
@@ -868,7 +896,7 @@ alb-ingress   *       xxx.ap-southeast-1.elb.amazonaws.com   80      13m
             <a class="nav nav-prev" href="../5.create-app/" title="5. Create APP Deployment Service"> <i class="fas fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../7.create-service-account/" title="7. Create service account for pod" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../7.monitor/" title="7. Monitoring EKS" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
         
     </div>
 
@@ -877,19 +905,19 @@ alb-ingress   *       xxx.ap-southeast-1.elb.amazonaws.com   80      13m
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1594737289"></script>
-    <script src="../js/perfect-scrollbar.min.js?1594737289"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1594737289"></script>
-    <script src="../js/jquery.sticky.js?1594737289"></script>
-    <script src="../js/featherlight.min.js?1594737289"></script>
-    <script src="../js/highlight.pack.js?1594737289"></script>
+    <script src="../js/clipboard.min.js?1596561264"></script>
+    <script src="../js/perfect-scrollbar.min.js?1596561264"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1596561264"></script>
+    <script src="../js/jquery.sticky.js?1596561264"></script>
+    <script src="../js/featherlight.min.js?1596561264"></script>
+    <script src="../js/highlight.pack.js?1596561264"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1594737289"></script>
-    <script src="../js/learn.js?1594737289"></script>
-    <script src="../js/hugo-learn.js?1594737289"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1596561264"></script>
+    <script src="../js/learn.js?1596561264"></script>
+    <script src="../js/hugo-learn.js?1596561264"></script>
 
-    <link href="../mermaid/mermaid.css?1594737289" type="text/css" rel="stylesheet" />
-    <script src="../mermaid/mermaid.min.js?1594737289"></script>
+    <link href="../mermaid/mermaid.css?1596561264" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.min.js?1596561264"></script>
     <script>
 	var config = {
         startOnLoad:true,

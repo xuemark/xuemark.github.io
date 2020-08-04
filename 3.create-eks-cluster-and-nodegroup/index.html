@@ -18,21 +18,21 @@
     <title>3. Create EKS Cluster and Nodegroup :: EKS Workshop</title>
 
     
-    <link href="../css/nucleus.css?1594737289" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1594737289" rel="stylesheet">
-    <link href="../css/hybrid.css?1594737289" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1594737289" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1594737289" rel="stylesheet">
-    <link href="../css/auto-complete.css?1594737289" rel="stylesheet">
-    <link href="../css/theme.css?1594737289" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1594737289" rel="stylesheet">
-    <link href="../css/jquery-ui.min.css?1594737289" rel="stylesheet">
+    <link href="../css/nucleus.css?1596561263" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1596561263" rel="stylesheet">
+    <link href="../css/hybrid.css?1596561263" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1596561263" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1596561263" rel="stylesheet">
+    <link href="../css/auto-complete.css?1596561263" rel="stylesheet">
+    <link href="../css/theme.css?1596561263" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1596561263" rel="stylesheet">
+    <link href="../css/jquery-ui.min.css?1596561263" rel="stylesheet">
     
-      <link href="../css/theme-mine.css?1594737289" rel="stylesheet">
+      <link href="../css/theme-mine.css?1596561263" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1594737289"></script>
-    <script src="../js/jquery-ui-1.12.1.min.js?1594737289"></script>
+    <script src="../js/jquery-3.3.1.min.js?1596561263"></script>
+    <script src="../js/jquery-ui-1.12.1.min.js?1596561263"></script>
 
 
     <style type="text/css">
@@ -199,13 +199,13 @@
  
   
     
-    <li data-nav-id="/7.create-service-account/" title="7. Create service account for pod" class="dd-item 
+    <li data-nav-id="/7.monitor/" title="7. Monitoring EKS" class="dd-item 
         
         
         
         ">
-      <a href="../7.create-service-account/">
-          7. Create service account for pod
+      <a href="../7.monitor/">
+          7. Monitoring EKS
           
       </a>
       
@@ -221,13 +221,35 @@
  
   
     
-    <li data-nav-id="/8.scale-pod-node/" title="8. Scale pod and node" class="dd-item 
+    <li data-nav-id="/8.create-service-account/" title="8. Create service account for pod" class="dd-item 
         
         
         
         ">
-      <a href="../8.scale-pod-node/">
-          8. Scale pod and node
+      <a href="../8.create-service-account/">
+          8. Create service account for pod
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/9.scale-pod-node/" title="9. Scale pod and node" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../9.scale-pod-node/">
+          9. Scale pod and node
           
       </a>
       
@@ -298,9 +320,8 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#1-environment">1. Environment</a></li>
-    <li><a href="#2-get-subnet-id">2. get subnet-id</a></li>
-    <li><a href="#3-create-eks-cluster-and-nodegroup">3. Create EKS Cluster and Nodegroup</a></li>
-    <li><a href="#4-check-node-group-status">4. check node group status</a></li>
+    <li><a href="#2-create-eks-cluster-and-nodegroup">2. Create EKS Cluster and Nodegroup</a></li>
+    <li><a href="#3-check-node-group-status">3. check node group status</a></li>
   </ul>
 </nav>
     </div>
@@ -330,23 +351,15 @@
 export CLUSTER_NAME=eks-test
 export NODEGROUP=$CLUSTER_NAME-nodegroup
 export TOMCAT_VERSION=9.0.37
-</code></pre><h2 id="2-get-subnet-id">2. get subnet-id</h2>
-<ul>
-<li>点击左上角Services，搜索VPC。</li>
-<li>点击VPC进入。</li>
-<li>点击左侧Subnets。</li>
-<li>查看Public Subnet x和Private Subnet x的Subnet ID。</li>
-<li>用该subnet id更新下面的指令。</li>
-<li>或者用下面的命令</li>
-</ul>
-<pre><code>aws ec2 describe-subnets  --filters Name=vpc-id,Values=$(aws ec2 describe-vpcs --filters Name=tag:Name,Values=VPC-Test --region $AWS_REGION| jq -r '.Vpcs[0].VpcId') --region $AWS_REGION --query &quot;Subnets[*].{SubnetId:SubnetId,SubnetName:Tags[?Key=='Name'].Value}&quot;
-</code></pre><h2 id="3-create-eks-cluster-and-nodegroup">3. Create EKS Cluster and Nodegroup</h2>
-<pre><code>eksctl create cluster \
+</code></pre><h2 id="2-create-eks-cluster-and-nodegroup">2. Create EKS Cluster and Nodegroup</h2>
+<p>Create Cluster Script</p>
+<pre><code>cat &lt;&lt;EOF &gt; create_cluster.sh
+eksctl create cluster \
 --name $CLUSTER_NAME \
 --version 1.16 \
 --region $AWS_REGION \
---vpc-public-subnets subnet-xxx,subnet-xxx,subnet-xxx \
---vpc-private-subnets subnet-xxx,subnet-xxx,subnet-xxx \
+--vpc-public-subnets xxx \
+--vpc-private-subnets yyy \
 --nodegroup-name $CLUSTER_NAME-nodegroup \
 --node-type t3.small \
 --node-volume-size 5 \
@@ -358,8 +371,25 @@ export TOMCAT_VERSION=9.0.37
 --managed \
 --asg-access \
 --full-ecr-access
+EOF
+</code></pre><p>Get and replace subnet id</p>
+<pre><code>subnets=$(aws ec2 describe-subnets  --filters Name=tag:Name,Values=&quot;Public Subnet 1&quot;,&quot;Public Subnet 2&quot;,&quot;Public Subnet 3&quot; --region $AWS_REGION --query &quot;Subnets[*].{SubnetId:SubnetId}&quot; --o text)
+
+subnets=${subnets//[[:space:]]/,}
+
+sed -i &quot;s/xxx/${subnets}/&quot; create_cluster.sh
+
+subnets=$(aws ec2 describe-subnets  --filters Name=tag:Name,Values=&quot;Private Subnet 1&quot;,&quot;Private Subnet 2&quot;,&quot;Private Subnet 3&quot; --region $AWS_REGION --query &quot;Subnets[*].{SubnetId:SubnetId}&quot; --o text)
+
+subnets=${subnets//[[:space:]]/,}
+
+sed -i &quot;s/yyy/${subnets}/&quot; create_cluster.sh
+
+cat create_cluster.sh
+</code></pre><p>Run create_cluster.sh</p>
+<pre><code>sh create_cluster.sh
 </code></pre><p>wait about 10-15 minutes</p>
-<h2 id="4-check-node-group-status">4. check node group status</h2>
+<h2 id="3-check-node-group-status">3. check node group status</h2>
 <pre><code>kubectl get node
 </code></pre><p>output</p>
 <pre><code>NAME                                                STATUS   ROLES    AGE    VERSION
@@ -534,6 +564,22 @@ ip-192-168-14-19.cn-northwest-1.compute.internal    Ready    &lt;none&gt;   4d1h
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
 
@@ -553,19 +599,19 @@ ip-192-168-14-19.cn-northwest-1.compute.internal    Ready    &lt;none&gt;   4d1h
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1594737289"></script>
-    <script src="../js/perfect-scrollbar.min.js?1594737289"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1594737289"></script>
-    <script src="../js/jquery.sticky.js?1594737289"></script>
-    <script src="../js/featherlight.min.js?1594737289"></script>
-    <script src="../js/highlight.pack.js?1594737289"></script>
+    <script src="../js/clipboard.min.js?1596561263"></script>
+    <script src="../js/perfect-scrollbar.min.js?1596561263"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1596561263"></script>
+    <script src="../js/jquery.sticky.js?1596561263"></script>
+    <script src="../js/featherlight.min.js?1596561263"></script>
+    <script src="../js/highlight.pack.js?1596561263"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1594737289"></script>
-    <script src="../js/learn.js?1594737289"></script>
-    <script src="../js/hugo-learn.js?1594737289"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1596561263"></script>
+    <script src="../js/learn.js?1596561263"></script>
+    <script src="../js/hugo-learn.js?1596561263"></script>
 
-    <link href="../mermaid/mermaid.css?1594737289" type="text/css" rel="stylesheet" />
-    <script src="../mermaid/mermaid.min.js?1594737289"></script>
+    <link href="../mermaid/mermaid.css?1596561263" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.min.js?1596561263"></script>
     <script>
 	var config = {
         startOnLoad:true,

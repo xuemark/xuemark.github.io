@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta property="og:title" content="lucky-money.lab798.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lucky-money.lab798.com" />
+    <meta property="og:image" content="https://lucky-money.lab798.com/images/AWS-Logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.72.0" />
+    <meta name="description" content="Solution Architect">
+<meta name="author" content="Mark Xue">
+
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+
+    <title>9. Scale pod and node :: EKS Workshop</title>
+
+    
+    <link href="../css/nucleus.css?1596561264" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1596561264" rel="stylesheet">
+    <link href="../css/hybrid.css?1596561264" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1596561264" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1596561264" rel="stylesheet">
+    <link href="../css/auto-complete.css?1596561264" rel="stylesheet">
+    <link href="../css/theme.css?1596561264" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1596561264" rel="stylesheet">
+    <link href="../css/jquery-ui.min.css?1596561264" rel="stylesheet">
+    
+      <link href="../css/theme-mine.css?1596561264" rel="stylesheet">
+    
+
+    <script src="../js/jquery-3.3.1.min.js?1596561264"></script>
+    <script src="../js/jquery-ui-1.12.1.min.js?1596561264"></script>
+
+
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/9.scale-pod-node/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="../" title="Go home"><font size="5"><b>EKS Workshop</b></font></a>
+
+    </div>
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/1.login-to-aws-console/" title="1. Login to AWS Console" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../1.login-to-aws-console/">
+          1. Login to AWS Console
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/2.install-tools-for-eks/" title="2. Install Tools For EKS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../2.install-tools-for-eks/">
+          2. Install Tools For EKS
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/3.create-eks-cluster-and-nodegroup/" title="3. Create EKS Cluster and Nodegroup" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../3.create-eks-cluster-and-nodegroup/">
+          3. Create EKS Cluster and Nodegroup
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/4.docker-image-build/" title="4. Docker Imager Build" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../4.docker-image-build/">
+          4. Docker Imager Build
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/5.create-app/" title="5. Create APP Deployment Service" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../5.create-app/">
+          5. Create APP Deployment Service
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/6.create-alb-ingress-controller/" title="6. Create ALB Ingress Controller" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../6.create-alb-ingress-controller/">
+          6. Create ALB Ingress Controller
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/7.monitor/" title="7. Monitoring EKS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../7.monitor/">
+          7. Monitoring EKS
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/8.create-service-account/" title="8. Create service account for pod" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../8.create-service-account/">
+          8. Create service account for pod
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/9.scale-pod-node/" title="9. Scale pod and node" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="../9.scale-pod-node/">
+          9. Scale pod and node
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <left>
+    <i class="fas fa-heart"></i> Built with Mark Xue
+
+</left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            <a href='../'>EKS Workshop</a> > 9. Scale pod and node
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#configure-hpa">Configure HPA</a>
+      <ul>
+        <li><a href="#1-manually-scale-pod">1. manually scale pod</a></li>
+        <li><a href="#2-check-pod-status">2. check pod status</a></li>
+        <li><a href="#3-scale-node-group">3. scale node group</a></li>
+        <li><a href="#4-check-pod-status">4. check pod status</a></li>
+        <li><a href="#5-create-hpa">5. create HPA</a></li>
+        <li><a href="#6-scale-down-pod">6. scale down pod</a></li>
+        <li><a href="#7-set-limit-for-pod">7. set limit for pod</a></li>
+        <li><a href="#8-set-autoscale-policy">8. set autoscale policy</a></li>
+        <li><a href="#9-monitor-hpa">9. monitor HPA</a></li>
+        <li><a href="#10-load-test">10. load test</a></li>
+        <li><a href="#11-stop-load">11. stop load</a></li>
+      </ul>
+    </li>
+    <li><a href="#configure-ca">Configure CA</a>
+      <ul>
+        <li><a href="#1-create-cluster-autoscaler">1. create cluster autoscaler</a></li>
+        <li><a href="#2-load-test">2. load test</a></li>
+        <li><a href="#3-monitor-hpa">3. monitor HPA</a></li>
+        <li><a href="#4-check-nod-count">4. check nod count</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>9. Scale pod and node</h1>
+          
+
+        
+
+
+
+	
+<div class="notices note" ><p>This is <a href="../">link</a> for return home page.</p>
+</div>
+
+<h2 id="configure-hpa">Configure HPA</h2>
+<h3 id="1-manually-scale-pod">1. manually scale pod</h3>
+<pre><code>kubectl scale --replicas=10 deployment/myapp-deployment
+kubectl get pod -o wide
+</code></pre><p>Check EC2&gt;LOAD BALANCING&gt;Target Group&gt;Targets</p>
+<h3 id="2-check-pod-status">2. check pod status</h3>
+<p>There are 6 pod in Pending status.</p>
+<pre><code>kubectl get pod
+kubectl get pod -o json | jq -r '.items[] | select(.status.phase==&quot;Pending&quot;)' | jq -r '.metadata.name'
+kubectl get events
+</code></pre><h3 id="3-scale-node-group">3. scale node group</h3>
+<p>scale node instance to 2</p>
+<pre><code>eksctl scale nodegroup --cluster=${CLUSTER_NAME} --nodes=2 --name=${NODEGROUP} --region=${AWS_REGION}
+kubectl get node
+</code></pre><h3 id="4-check-pod-status">4. check pod status</h3>
+<p>All pods are in Running status.</p>
+<pre><code>kubectl get pod -o wide
+</code></pre><h3 id="5-create-hpa">5. create HPA</h3>
+<pre><code>curl -sL https://api.github.com/repos/kubernetes-sigs/metrics-server/tarball/v0.3.6 -o metrics-server-v0.3.6.tar.gz
+tar -xzf metrics-server-v0.3.6.tar.gz
+kubectl apply -f kubernetes-sigs-metrics-server-d1f4f6f/deploy/1.8+/
+kubectl get pod --all-namespaces
+</code></pre><h3 id="6-scale-down-pod">6. scale down pod</h3>
+<pre><code>kubectl scale --replicas=1 deployment/myapp-deployment
+</code></pre><h3 id="7-set-limit-for-pod">7. set limit for pod</h3>
+<pre><code>kubectl set resources deployment myapp-deployment --limits=cpu=200m,memory=256Mi
+</code></pre><h3 id="8-set-autoscale-policy">8. set autoscale policy</h3>
+<pre><code>kubectl autoscale deployment myapp-deployment --cpu-percent=30 --min=1 --max=20
+</code></pre><h3 id="9-monitor-hpa">9. monitor HPA</h3>
+<pre><code>kubectl top pod
+kubectl get hpa --watch
+</code></pre><h3 id="10-load-test">10. load test</h3>
+<p>open another session, replace url</p>
+<pre><code>ALB_URL=$(kubectl get ingress -o json| jq -r '.items[0].status.loadBalancer.ingress[0].hostname')
+ab -c 10 -n 2000000 http://${ALB_URL}/index.jsp
+</code></pre><h3 id="11-stop-load">11. stop load</h3>
+<ul>
+<li>shut down ab test</li>
+<li>scale in pod</li>
+</ul>
+<pre><code>kubectl delete hpa myapp-deployment
+kubectl scale --replicas=1 deployment/myapp-deployment
+</code></pre><p>view pod count , should be 1</p>
+<pre><code>kubectl get pod
+</code></pre><p>re-create hpa</p>
+<pre><code>kubectl autoscale deployment myapp-deployment --cpu-percent=30 --min=1 --max=20
+</code></pre><h2 id="configure-ca">Configure CA</h2>
+<h3 id="1-create-cluster-autoscaler">1. create cluster autoscaler</h3>
+<h4 id="make-ca-yaml">make ca yaml</h4>
+<pre><code>cat &lt;&lt;EOF &gt; cluster-autoscaler-autodiscover.yaml
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    k8s-addon: cluster-autoscaler.addons.k8s.io
+    k8s-app: cluster-autoscaler
+  name: cluster-autoscaler
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-autoscaler
+  labels:
+    k8s-addon: cluster-autoscaler.addons.k8s.io
+    k8s-app: cluster-autoscaler
+rules:
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;events&quot;, &quot;endpoints&quot;]
+    verbs: [&quot;create&quot;, &quot;patch&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;pods/eviction&quot;]
+    verbs: [&quot;create&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;pods/status&quot;]
+    verbs: [&quot;update&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;endpoints&quot;]
+    resourceNames: [&quot;cluster-autoscaler&quot;]
+    verbs: [&quot;get&quot;, &quot;update&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;nodes&quot;]
+    verbs: [&quot;watch&quot;, &quot;list&quot;, &quot;get&quot;, &quot;update&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources:
+      - &quot;pods&quot;
+      - &quot;services&quot;
+      - &quot;replicationcontrollers&quot;
+      - &quot;persistentvolumeclaims&quot;
+      - &quot;persistentvolumes&quot;
+    verbs: [&quot;watch&quot;, &quot;list&quot;, &quot;get&quot;]
+  - apiGroups: [&quot;extensions&quot;]
+    resources: [&quot;replicasets&quot;, &quot;daemonsets&quot;]
+    verbs: [&quot;watch&quot;, &quot;list&quot;, &quot;get&quot;]
+  - apiGroups: [&quot;policy&quot;]
+    resources: [&quot;poddisruptionbudgets&quot;]
+    verbs: [&quot;watch&quot;, &quot;list&quot;]
+  - apiGroups: [&quot;apps&quot;]
+    resources: [&quot;statefulsets&quot;, &quot;replicasets&quot;, &quot;daemonsets&quot;]
+    verbs: [&quot;watch&quot;, &quot;list&quot;, &quot;get&quot;]
+  - apiGroups: [&quot;storage.k8s.io&quot;]
+    resources: [&quot;storageclasses&quot;, &quot;csinodes&quot;]
+    verbs: [&quot;watch&quot;, &quot;list&quot;, &quot;get&quot;]
+  - apiGroups: [&quot;batch&quot;, &quot;extensions&quot;]
+    resources: [&quot;jobs&quot;]
+    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;patch&quot;]
+  - apiGroups: [&quot;coordination.k8s.io&quot;]
+    resources: [&quot;leases&quot;]
+    verbs: [&quot;create&quot;]
+  - apiGroups: [&quot;coordination.k8s.io&quot;]
+    resourceNames: [&quot;cluster-autoscaler&quot;]
+    resources: [&quot;leases&quot;]
+    verbs: [&quot;get&quot;, &quot;update&quot;]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+  labels:
+    k8s-addon: cluster-autoscaler.addons.k8s.io
+    k8s-app: cluster-autoscaler
+rules:
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;configmaps&quot;]
+    verbs: [&quot;create&quot;,&quot;list&quot;,&quot;watch&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;configmaps&quot;]
+    resourceNames: [&quot;cluster-autoscaler-status&quot;, &quot;cluster-autoscaler-priority-expander&quot;]
+    verbs: [&quot;delete&quot;, &quot;get&quot;, &quot;update&quot;, &quot;watch&quot;]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-autoscaler
+  labels:
+    k8s-addon: cluster-autoscaler.addons.k8s.io
+    k8s-app: cluster-autoscaler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-autoscaler
+subjects:
+  - kind: ServiceAccount
+    name: cluster-autoscaler
+    namespace: kube-system
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+  labels:
+    k8s-addon: cluster-autoscaler.addons.k8s.io
+    k8s-app: cluster-autoscaler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cluster-autoscaler
+subjects:
+  - kind: ServiceAccount
+    name: cluster-autoscaler
+    namespace: kube-system
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+  labels:
+    app: cluster-autoscaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-autoscaler
+  template:
+    metadata:
+      labels:
+        app: cluster-autoscaler
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8085'
+    spec:
+      serviceAccountName: cluster-autoscaler
+      containers:
+        - image: k8s.gcr.io/cluster-autoscaler:v1.14.7
+          name: cluster-autoscaler
+          resources:
+            limits:
+              cpu: 100m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
+          command:
+            - ./cluster-autoscaler
+            - --v=4
+            - --stderrthreshold=info
+            - --cloud-provider=aws
+            - --skip-nodes-with-local-storage=false
+            - --expander=least-waste
+            - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/xxx
+            - --balance-similar-node-groups
+            - --skip-nodes-with-system-pods=false
+          volumeMounts:
+            - name: ssl-certs
+              mountPath: /etc/ssl/certs/ca-certificates.crt
+              readOnly: true
+          imagePullPolicy: &quot;Always&quot;
+      volumes:
+        - name: ssl-certs
+          hostPath:
+            path: &quot;/etc/ssl/certs/ca-bundle.crt&quot;
+EOF
+</code></pre><h4 id="update-cluster-name">update cluster name</h4>
+<pre><code>sed -i &quot;s#xxx#${CLUSTER_NAME}#&quot; cluster-autoscaler-autodiscover.yaml
+</code></pre><h4 id="create-cluster-autoscaler">create cluster autoscaler</h4>
+<pre><code>kubectl apply -f cluster-autoscaler-autodiscover.yaml
+</code></pre><h4 id="add-annotation">add annotation</h4>
+<pre><code>kubectl -n kube-system annotate deployment.apps/cluster-autoscaler cluster-autoscaler.kubernetes.io/safe-to-evict=&quot;false&quot;
+</code></pre><h4 id="update-image">update image</h4>
+<pre><code>kubectl -n kube-system set image deployment.apps/cluster-autoscaler cluster-autoscaler=asia.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.16.5
+</code></pre><h4 id="cluster-autoscaler-logs">cluster autoscaler logs</h4>
+<pre><code>kubectl -n kube-system logs -f deployment.apps/cluster-autoscaler
+</code></pre><h3 id="2-load-test">2. load test</h3>
+<pre><code>ab -c 10 -n 2000000 http://${ALB_URL}/index.jsp
+</code></pre><h3 id="3-monitor-hpa">3. monitor HPA</h3>
+<pre><code>kubectl top pod
+kubectl get hpa --watch
+</code></pre><h3 id="4-check-nod-count">4. check nod count</h3>
+<pre><code>kubectl get node
+</code></pre>
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+        
+            <a class="nav nav-prev" href="../8.create-service-account/" title="8. Create service account for pod"> <i class="fas fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="../1.login-to-aws-console/" title="1. Login to AWS Console" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../js/clipboard.min.js?1596561264"></script>
+    <script src="../js/perfect-scrollbar.min.js?1596561264"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1596561264"></script>
+    <script src="../js/jquery.sticky.js?1596561264"></script>
+    <script src="../js/featherlight.min.js?1596561264"></script>
+    <script src="../js/highlight.pack.js?1596561264"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/modernizr.custom-3.6.0.js?1596561264"></script>
+    <script src="../js/learn.js?1596561264"></script>
+    <script src="../js/hugo-learn.js?1596561264"></script>
+
+    <link href="../mermaid/mermaid.css?1596561264" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.min.js?1596561264"></script>
+    <script>
+	var config = {
+        startOnLoad:true,
+        flowchart:{
+	    curve:'basis'
+        }
+      };
+        mermaid.initialize(config);
+    </script>
+    
+
+  </body>
+</html>
