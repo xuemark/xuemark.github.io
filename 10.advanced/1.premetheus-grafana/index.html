@@ -12,27 +12,27 @@
     <meta name="description" content="Solution Architect">
 <meta name="author" content="Mark Xue">
 
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
 
-    <title>Categories :: EKS Workshop</title>
+    <title>1. Prometheus and Grafana Monitoring :: EKS Workshop</title>
 
     
-    <link href="../css/nucleus.css?1597892588" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1597892588" rel="stylesheet">
-    <link href="../css/hybrid.css?1597892588" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1597892588" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1597892588" rel="stylesheet">
-    <link href="../css/auto-complete.css?1597892588" rel="stylesheet">
-    <link href="../css/theme.css?1597892588" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1597892588" rel="stylesheet">
-    <link href="../css/jquery-ui.min.css?1597892588" rel="stylesheet">
+    <link href="../../css/nucleus.css?1597892588" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1597892588" rel="stylesheet">
+    <link href="../../css/hybrid.css?1597892588" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1597892588" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1597892588" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1597892588" rel="stylesheet">
+    <link href="../../css/theme.css?1597892588" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1597892588" rel="stylesheet">
+    <link href="../../css/jquery-ui.min.css?1597892588" rel="stylesheet">
     
-      <link href="../css/theme-mine.css?1597892588" rel="stylesheet">
+      <link href="../../css/theme-mine.css?1597892588" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1597892588"></script>
-    <script src="../js/jquery-ui-1.12.1.min.js?1597892588"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1597892588"></script>
+    <script src="../../js/jquery-ui-1.12.1.min.js?1597892588"></script>
 
 
     <style type="text/css">
@@ -43,14 +43,14 @@
     </style>
     
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/10.advanced/1.premetheus-grafana/">
     <nav id="sidebar" class="">
 
 
 
   <div id="header-wrapper">
     <div id="header">
-      <a href="../" title="Go home"><font size="5"><b>EKS Workshop</b></font></a>
+      <a href="../../" title="Go home"><font size="5"><b>EKS Workshop</b></font></a>
 
     </div>
     
@@ -72,7 +72,7 @@
         
         
         ">
-      <a href="../1.login-to-aws-console/">
+      <a href="../../1.login-to-aws-console/">
           1. Login to AWS Console
           
       </a>
@@ -94,7 +94,7 @@
         
         
         ">
-      <a href="../2.install-tools-for-eks/">
+      <a href="../../2.install-tools-for-eks/">
           2. Linux Install Tools For EKS
           
       </a>
@@ -116,7 +116,7 @@
         
         
         ">
-      <a href="../3.create-eks-cluster-and-nodegroup/">
+      <a href="../../3.create-eks-cluster-and-nodegroup/">
           3. Create EKS Cluster and Nodegroup
           
       </a>
@@ -138,7 +138,7 @@
         
         
         ">
-      <a href="../4.docker-image-build/">
+      <a href="../../4.docker-image-build/">
           4. Docker Imager Build
           
       </a>
@@ -160,7 +160,7 @@
         
         
         ">
-      <a href="../5.create-app/">
+      <a href="../../5.create-app/">
           5. Create APP Deployment Service
           
       </a>
@@ -182,7 +182,7 @@
         
         
         ">
-      <a href="../6.create-alb-ingress-controller/">
+      <a href="../../6.create-alb-ingress-controller/">
           6. Create ALB Ingress Controller
           
       </a>
@@ -204,7 +204,7 @@
         
         
         ">
-      <a href="../7.monitor/">
+      <a href="../../7.monitor/">
           7. Monitoring EKS
           
       </a>
@@ -226,7 +226,7 @@
         
         
         ">
-      <a href="../8.create-service-account/">
+      <a href="../../8.create-service-account/">
           8. Create service account for pod
           
       </a>
@@ -248,7 +248,7 @@
         
         
         ">
-      <a href="../9.scale-pod-node/">
+      <a href="../../9.scale-pod-node/">
           9. Scale pod and node
           
       </a>
@@ -266,11 +266,11 @@
   
     
     <li data-nav-id="/10.advanced/" title="10. Advanced" class="dd-item 
-        
+        parent
         
         
         ">
-      <a href="../10.advanced/">
+      <a href="../../10.advanced/">
           10. Advanced
           
       </a>
@@ -293,11 +293,11 @@
   
     
     <li data-nav-id="/10.advanced/1.premetheus-grafana/" title="1. Prometheus and Grafana Monitoring" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
-      <a href="../10.advanced/1.premetheus-grafana/">
+      <a href="../../10.advanced/1.premetheus-grafana/">
           1. Prometheus and Grafana Monitoring
           
       </a>
@@ -365,7 +365,13 @@
             
           
           
-            <a href='../'>EKS Workshop</a> > Categories
+            
+            
+          
+          
+            <a href='../../'>EKS Workshop</a> > <a href='../../10.advanced/'>10. Advanced</a> > 1. Prometheus and Grafana Monitoring
+          
+         
           
          
           
@@ -375,7 +381,19 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#create-nodegroup">Create nodegroup</a>
+      <ul>
+        <li><a href="#1-install-helm">1. install helm</a></li>
+        <li><a href="#2-install-prometheus">2. install Prometheus</a></li>
+        <li><a href="#3-install-grafana">3. install Grafana</a></li>
+        <li><a href="#4-grafana-import-dashboard">4. grafana import dashboard</a></li>
+        <li><a href="#5-cleanup">5. cleanup</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -387,18 +405,113 @@
         
         <div id="body-inner">
           
-            <h1>Categories</h1>
+            <h1>1. Prometheus and Grafana Monitoring</h1>
           
 
         
 
 
 
-
-
-<ul>
 	
+<div class="notices note" ><p>This is <a href="../../">link</a> for return home page.</p>
+</div>
+
+<h2 id="create-nodegroup">Create nodegroup</h2>
+<h3 id="1-install-helm">1. install helm</h3>
+<ul>
+<li>linux</li>
 </ul>
+<pre><code>curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+</code></pre><ul>
+<li>macos</li>
+</ul>
+<pre><code>brew install helm
+</code></pre><ul>
+<li>helm add repository</li>
+</ul>
+<pre><code>helm repo list
+helm repo remove stable
+helm repo update
+helm repo add stable https://burdenbear.github.io/kube-charts-mirror/
+</code></pre><h3 id="2-install-prometheus">2. install Prometheus</h3>
+<ul>
+<li>Create a Prometheus namespace.</li>
+</ul>
+<pre><code>kubectl create namespace prometheus
+</code></pre><ul>
+<li>Deploy Prometheus with Helm.</li>
+</ul>
+<pre><code>helm install prometheus stable/prometheus \
+    --namespace prometheus \
+    --set alertmanager.persistentVolume.storageClass=&quot;gp2&quot;,server.persistentVolume.storageClass=&quot;gp2&quot;
+</code></pre><p>output:
+The Prometheus server can be accessed via port 80 on the following DNS name from within your cluster:
+prometheus-server.prometheus.svc.cluster.local</p>
+<ul>
+<li>Use kubectl to port forward the Prometheus console to your local machine.</li>
+</ul>
+<pre><code>kubectl --namespace=prometheus port-forward deploy/prometheus-server 9090
+</code></pre><ul>
+<li>see Prometheus metrics</li>
+</ul>
+<pre><code>http://localhost:9090
+choose Status&gt;Targets
+</code></pre><h3 id="3-install-grafana">3. install Grafana</h3>
+<ul>
+<li>create namespace</li>
+</ul>
+<pre><code>kubectl create namespace grafana
+</code></pre><ul>
+<li>Deploy Grafana</li>
+</ul>
+<pre><code>helm install grafana stable/grafana \
+    --namespace grafana \
+    --set persistence.storageClassName=&quot;gp2&quot; \
+    --set adminPassword='EKS!sAWSome' \
+    --set datasources.&quot;datasources\.yaml&quot;.apiVersion=1 \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].name=Prometheus \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].type=prometheus \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].url=http://prometheus-server.prometheus.svc.cluster.local \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].access=proxy \
+    --set datasources.&quot;datasources\.yaml&quot;.datasources[0].isDefault=true \
+    --set service.type=ClusterIP
+</code></pre><ul>
+<li>Use kubectl to port forward the Grafana console to your local machine.</li>
+</ul>
+<pre><code>kubectl --namespace=grafana port-forward deploy/grafana 3000
+</code></pre><ul>
+<li>see Grafana</li>
+</ul>
+<pre><code>http://localhost:3000
+</code></pre><ul>
+<li>Email or username = admin</li>
+<li>Password = EKS!sAWSome</li>
+</ul>
+<h3 id="4-grafana-import-dashboard">4. grafana import dashboard</h3>
+<ul>
+<li>查看所有集群节点的监控面板</li>
+</ul>
+<pre><code>左侧面板点击' + '，选择' Import '
+Grafana.com Dashboard下输入3119
+prometheus data source下拉框中选择prometheus
+点击' Import '
+</code></pre><ul>
+<li>查看Pods的监控面板</li>
+</ul>
+<pre><code>左侧面板点击' + '，选择' Import '
+Grafana.com Dashboard下输6417
+输入Kubernetes Pods Monitoring作为Dashboard名称
+点击change，设置uid
+prometheus data source下拉框中选择prometheus
+点击' Import '
+</code></pre><h3 id="5-cleanup">5. cleanup</h3>
+<pre><code>helm uninstall grafana --namespace grafana
+helm uninstall prometheus --namespace prometheus
+kubectl delete ns grafana
+kubectl delete ns prometheus
+</code></pre>
+
+
 
 
 <footer class=" footline" >
@@ -583,6 +696,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -598,6 +712,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -619,8 +734,10 @@
 
 
         
+            <a class="nav nav-prev" href="../../10.advanced/" title="10. Advanced"> <i class="fas fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="../1.login-to-aws-console/" title="1. Login to AWS Console" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="../../1.login-to-aws-console/" title="1. Login to AWS Console" style="margin-right: 0px;"><i class="fas fa-chevron-right"></i></a>
         
     </div>
 
@@ -629,19 +746,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1597892588"></script>
-    <script src="../js/perfect-scrollbar.min.js?1597892588"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1597892588"></script>
-    <script src="../js/jquery.sticky.js?1597892588"></script>
-    <script src="../js/featherlight.min.js?1597892588"></script>
-    <script src="../js/highlight.pack.js?1597892588"></script>
+    <script src="../../js/clipboard.min.js?1597892588"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1597892588"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1597892588"></script>
+    <script src="../../js/jquery.sticky.js?1597892588"></script>
+    <script src="../../js/featherlight.min.js?1597892588"></script>
+    <script src="../../js/highlight.pack.js?1597892588"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1597892588"></script>
-    <script src="../js/learn.js?1597892588"></script>
-    <script src="../js/hugo-learn.js?1597892588"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1597892588"></script>
+    <script src="../../js/learn.js?1597892588"></script>
+    <script src="../../js/hugo-learn.js?1597892588"></script>
 
-    <link href="../mermaid/mermaid.css?1597892588" type="text/css" rel="stylesheet" />
-    <script src="../mermaid/mermaid.min.js?1597892588"></script>
+    <link href="../../mermaid/mermaid.css?1597892588" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.min.js?1597892588"></script>
     <script>
 	var config = {
         startOnLoad:true,
